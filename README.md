@@ -22,8 +22,10 @@ place list of target sequences to search for in "SRR_TRGT_list.txt" (next line \
 Currently this runs 100 sequence searchs in parallel. scale to meet your needs but be aware it is more hdd space intensive than processor intensive
 
 Results:
+
 results are stored in - "results.txt" 
 
 
 Troubleshooting: 
+
 if something goes wrong, and it has joblib anywhere in its title, or your computer crashes, reduce n_jobs, it is the likely culprit. 
