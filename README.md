@@ -1,6 +1,7 @@
 # SRA_Search_Automation
 
 Requirements:
+
 Requires python 3.9 or higher
 
 Targeted at ubuntu 18.04 (though the ubuntu version doesn't really matter).
@@ -11,6 +12,7 @@ sudo pip3 install joblib
 
 
 Operation:
+
 Place files in your sra-toolkit/bin folder
 
 place list of sequences to search in "SRR_ACC_list.txt" (next line \n character is the only allowed nextline character. so file should be SEQUENCE\nSEQUENCE\n....SEQUENCE' - no \n after the last entry)
