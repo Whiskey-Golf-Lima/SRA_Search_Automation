@@ -23,6 +23,7 @@ import subprocess
 import os
 from joblib import Parallel, delayed
 import time
+from tqdm import tqdm
 
 def parseFile(file):
     #split by newline
@@ -63,15 +64,16 @@ def searchSequence(target, input):
         if e.returncode ==3:
             #this happens if the target sequence is not found.
             input = ''
-            pass
-        print('error---->')
-        print ('./sra-search ' + target + ' ' + input)
-        print('<--------error')
-        if e.returncode ==6:
-            input = ''
-            print('caught error code 6---->')
+
+        else:
+            print('error---->')
             print ('./sra-search ' + target + ' ' + input)
-            print('<--------caught error code 6')
+            print('<--------error')
+            if e.returncode ==6:
+                input = ''
+                print('caught error code 6---->')
+                print ('./sra-search ' + target + ' ' + input)
+                print('<--------caught error code 6')
 
 
     #if //target sequence is found, the source sequence name is returned, otherwise it is not
@@ -93,9 +95,9 @@ def main():
     start_time = time.time()
     #this shit is slow, so lets run 100 in parallel (to run more or less, change n_jobs). be aware the sra_search is a hdd space hog. running 100 normally uses about 6-10gb of disk space
     print('searching ' + str(len(target_sequences)) + ' target sequences')
-    searchSequence('TTATTTCCACATACAGGACATGTT', 'SRR2072219')
+    #searchSequence('TTATTTCCACATACAGGACATGTT', 'SRR2072219')
     for target in target_sequences:
-        results = Parallel(n_jobs=35,prefer='threads')(delayed(searchSequence)(target, i) for i in sequences_to_search)
+        results = Parallel(n_jobs=10,prefer='threads')(delayed(searchSequence)(target, i) for i in tqdm(sequences_to_search))
         sequences_to_search = [x for x in results if x]
         print('target sequences ' + str(count) + ' of ' + str(len(target_sequences)) + ' complete, ' + str(len(sequences_to_search)) + ' sequences matched target and will be searched/returned in the next round')
         count = count + 1
