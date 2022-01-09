@@ -1,5 +1,5 @@
 __author__ = 'William Grant Lohsen'
-__purpose__ = 'Some kinda science shit for the wifey'
+__purpose__ = 'Some kinda science stuff for the wife'
 __version__ = '1.0.0'
 __license__ = 'Permission is hereby granted, free of charge, to any person obtaining a copy of this software and ' \
               'associated documentation files (the "Software"), thanking Sarah Lohsen PhD for asking her husband ' \
@@ -57,7 +57,7 @@ def main():
 
     count = 1
     start_time = time.time()
-    #this shit is slow, so lets run 100 in parallel (to run more or less, change n_jobs). be aware the sra_search is a hdd space hog. running 100 normally uses about 6-10gb of disk space
+    #this is slow, so lets run 100 in parallel (to run more or less, change n_jobs). be aware the sra_search is a hdd space hog. running 100 normally uses about 6-10gb of disk space
     print('searching ' + str(len(target_sequences)) + ' target sequences')
     for target in target_sequences:
         results = Parallel(n_jobs=100,prefer='threads')(delayed(searchSequence)(target, i) for i in sequences_to_search)
